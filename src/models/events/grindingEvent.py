@@ -17,7 +17,9 @@ class GrindingEvent(Event):
         employees = self.simulation.controlVariables.grindingEmployees
         velocity = self.simulation.data.grindingVelocity
         minutes = self.simulation.data.grindingFrequency
-        self.simulation.state.increaseGroundCoffeeStock(employees * velocity * minutes)
+        totalCoffee = employees * velocity * minutes
+        self.simulation.results.totalGrindedCoffee += totalCoffee
+        self.simulation.state.increaseGroundCoffeeStock(totalCoffee)
 
     def _createUnconditionalFutureEvents_(self):
         return

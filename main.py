@@ -59,7 +59,7 @@ def main():
 
     print("--------------------------------------------------------------------------")
     winterSimulation.start()
-    print("Winter Simulation Results:")
+    print("WINTER SIMULATION RESULTS")
     print(winterSimulation.results)
 
     springSimulation = Simulation(
@@ -67,7 +67,7 @@ def main():
     )
 
     springSimulation.start()
-    print("Spring Simulation Results:")
+    print("SPRING SIMULATION RESULTS:")
     print(springSimulation.results)
 
 

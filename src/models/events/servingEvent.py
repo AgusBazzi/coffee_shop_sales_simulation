@@ -12,6 +12,7 @@ class ServingEvent(ABC):
         coffeeQty = self.simulation.data.generateCoffeeQuantity()
 
         totalGrams = coffeeGrams * coffeeQty
+        self.simulation.results.totalConsumedCoffee += totalGrams
 
         individualAttentionTime = (
             self.simulation.data.generateAtentionTime() + additionalTime
@@ -20,6 +21,7 @@ class ServingEvent(ABC):
 
         if self.simulation.state.groundCoffeeStock < totalGrams:
             requiredGrinding = totalGrams - self.simulation.state.groundCoffeeStock
+            self.simulation.results.totalGrindedCoffee += requiredGrinding
             grindingTime = requiredGrinding / self.simulation.data.grindingVelocity
             self.simulation.results.totalWaitingGrindingTimes += grindingTime
             self.simulation.results.totalWaitingGrinding += 1
