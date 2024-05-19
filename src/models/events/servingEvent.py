@@ -22,6 +22,7 @@ class ServingEvent(ABC):
             requiredGrinding = totalGrams - self.simulation.state.groundCoffeeStock
             grindingTime = requiredGrinding / self.simulation.data.grindingVelocity
             self.simulation.results.totalWaitingGrindingTimes += grindingTime
+            self.simulation.results.totalWaitingGrinding += 1
             attentionTime += grindingTime
 
         self.simulation.state.decreaseGroundCoffeeStock(totalGrams)

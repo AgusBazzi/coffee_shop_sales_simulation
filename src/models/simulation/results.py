@@ -9,8 +9,11 @@ class Results:
         self.meanWaitingTime = 0
         self.meanWaitingTimeDueToQueue = 0
         self.meanWaitingTimeDueToGrinding = 0
+        self.waitingDueToGrindingPercentage = 0
 
         # Intermediate results
+        self.totalCustomers = 0
+
         self.idleStartTimes = emptyArray.copy()
         self.totalIdleTimes = emptyArray.copy()
 
@@ -18,7 +21,8 @@ class Results:
         self.totalDepartTimes = 0
         self.totalServeTimes = 0
         self.totalWaitingGrindingTimes = 0
-        self.totalCustomers = 0
+
+        self.totalWaitingGrinding = 0
 
     def calculateFinalResults(self):
         self.idleTimePercentages = [
@@ -38,13 +42,21 @@ class Results:
             self.totalWaitingGrindingTimes
         ) / self.totalCustomers
 
+        self.waitingDueToGrindingPercentage = (
+            (self.totalWaitingGrinding) / self.totalCustomers * 100
+        )
+
     def __str__(self):
         return """
+        - Total Customers: {self.totalCustomers}
+        
         - Idle Time Percentages Per Box (%): {self.idleTimePercentages}
         
         - Mean Waiting Time (minutes): {self.meanWaitingTime}
         - Mean Waiting Time Due To Queue (minutes): {self.meanWaitingTimeDueToQueue}
         - Mean Waiting Time Due To Grinding (minutes): {self.meanWaitingTimeDueToGrinding}
+        
+        - Waiting Due To Grinding Percentage (%): {self.waitingDueToGrindingPercentage}
         """.format(
             self=self
         )
