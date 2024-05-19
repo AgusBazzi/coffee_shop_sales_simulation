@@ -10,17 +10,17 @@ class Data:
         # Common recommendation gr:ml is 1:15
         self.coffeeSizes = {
             "small": {
-                "probability": 0.2,
+                "probability": 0.29,
                 "coffeeGrams": 15,
                 "additionalTime": 0,
             },
             "regular": {
-                "probability": 0.4,
+                "probability": 0.36,
                 "coffeeGrams": 23,
                 "additionalTime": 2,
             },
             "large": {
-                "probability": 0.4,
+                "probability": 0.35,
                 "coffeeGrams": 31,
                 "additionalTime": 4,
             },
@@ -28,10 +28,10 @@ class Data:
 
         self.coffeeQuantities = {
             "1": {
-                "probability": 0.7,
+                "probability": 0.49,
             },
             "2": {
-                "probability": 0.3,
+                "probability": 0.51,
             },
         }
 
