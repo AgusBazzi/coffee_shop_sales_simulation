@@ -23,52 +23,66 @@ def get_user_input():
     return servingEmployees, grindingEmployees, simulationTimeWorkingDays
 
 
-def main():
-    print("Welcome to the Coffee Shop Simulation")
+def main(
+    defaultServingEmployees=2,
+    defaultGrindingEmployees=1,
+    defaultSimulationTime=365,
+    defaultSeason="Both",
+    defaultOutput="verbose",
+):
+    servingEmployees = defaultServingEmployees
+    grindingEmployees = defaultGrindingEmployees
+    simulationTimeWorkingDays = defaultSimulationTime
+    season = defaultSeason
 
-    servingEmployees = 2
-    grindingEmployees = 1
-    simulationTimeWorkingDays = 365
+    if defaultOutput != "quiet":
+        print("Welcome to the Coffee Shop Simulation")
+        while True:
+            print("\nThis is the current configuration:")
+            print(f"• Serving Employees: {servingEmployees}")
+            print(f"• Grinding Employees: {grindingEmployees}")
+            print(f"• Simulation Time: {simulationTimeWorkingDays} working days")
 
-    while True:
-        print("\nThis is the current configuration:")
-        print(f"• Serving Employees: {servingEmployees}")
-        print(f"• Grinding Employees: {grindingEmployees}")
-        print(f"• Simulation Time: {simulationTimeWorkingDays} working days")
+            proceed = (
+                input("\nDo you want to enter another set of details? (yes/no): ")
+                .strip()
+                .lower()
+            )
+            if proceed != "yes":
+                break
 
-        proceed = (
-            input("\nDo you want to enter another set of details? (yes/no): ")
-            .strip()
-            .lower()
-        )
-        if proceed != "yes":
-            break
-
-        servingEmployees, grindingEmployees, simulationTimeWorkingDays = (
-            get_user_input()
-        )
-        print(
-            "--------------------------------------------------------------------------"
-        )
+            servingEmployees, grindingEmployees, simulationTimeWorkingDays = (
+                get_user_input()
+            )
+            print(
+                "--------------------------------------------------------------------------"
+            )
 
     simulationTimeMinutes = simulationTimeWorkingDays * 8 * 60
 
     winterSimulation = Simulation(
         simulationTimeMinutes, servingEmployees, grindingEmployees, winterDist
     )
-
-    print("--------------------------------------------------------------------------")
-    winterSimulation.start()
-    print("WINTER SIMULATION RESULTS")
-    print(winterSimulation.results)
-
     springSimulation = Simulation(
         simulationTimeMinutes, servingEmployees, grindingEmployees, springDist
     )
 
-    springSimulation.start()
-    print("SPRING SIMULATION RESULTS:")
-    print(springSimulation.results)
+    print("--------------------------------------------------------------------------")
+
+    if season != "Spring":
+        winterSimulation.start()
+
+    if season != "Winter":
+        springSimulation.start()
+
+    if defaultOutput != "quiet":
+        print("WINTER SIMULATION RESULTS")
+        print(winterSimulation.results)
+
+        print("SPRING SIMULATION RESULTS:")
+        print(springSimulation.results)
+
+    return winterSimulation, springSimulation
 
 
 if __name__ == "__main__":

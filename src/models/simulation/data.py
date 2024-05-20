@@ -5,7 +5,7 @@ import random
 class Data:
     def __init__(self, interarrivalTimeDist: rv_continuous):
         self.interarrivalTimeDist = interarrivalTimeDist
-        self.atentionTimeDist = norm(loc=5, scale=2 / 1.96)
+        self.atentionTimeDist = norm(loc=3, scale=2 / 1.96)
 
         # Common recommendation gr:ml is 1:15
         self.coffeeSizes = {
@@ -17,12 +17,12 @@ class Data:
             "regular": {
                 "probability": 0.36,
                 "coffeeGrams": 23,
-                "additionalTime": 2,
+                "additionalTime": 1,
             },
             "large": {
                 "probability": 0.35,
                 "coffeeGrams": 31,
-                "additionalTime": 4,
+                "additionalTime": 2,
             },
         }
 
